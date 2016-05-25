@@ -1,5 +1,6 @@
 // This is auto-generated from tool/generate_map.dart.
 library html_unescape.named_chars_all;
+
 const List<String> keys = const <String>[
   "&CounterClockwiseContourIntegral;",
   "&DoubleLongLeftRightArrow;",

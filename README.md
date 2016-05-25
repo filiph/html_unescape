@@ -5,8 +5,14 @@ A Dart library for unescaping HTML-encoded strings.
 Supports:
 
 * Named Character References (`&nbsp;`)
+  * 2099 of them
 * Decimal Character References (`&#225;`)
 * Hexadecimal Character References (`&#xE3;`)
+
+The idea is that while you seldom need _encoding_ to such a level (most of the
+time, all you need to escape is `<`, `>`, `/`, `&` and `"`), you do want to
+make sure that you cover the whole spectrum when _decoding_ from HTML-escaped
+strings.
 
 ## Usage
 
@@ -27,3 +33,9 @@ you can `import 'package:html_unescape/html_unescape_basic.dart'` instead of
 the full version. This will decrease code size and increase performance. The
 only difference is in the size of the Named Character Reference dictionary.
 The full set includes the likes of `&DownLeftRightVector;` or `&UpArrowBar;`.
+
+## Issues
+
+[Please use GitHub tracker](https://github.com/filiph/html_unescape/issues).
+Don't hesitate to create 
+[pull requests](https://github.com/filiph/html_unescape/pulls), too.
