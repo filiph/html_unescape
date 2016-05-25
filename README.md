@@ -12,13 +12,14 @@ Supports:
 
 A simple usage example:
 
-    import 'package:html_unescape/html_unescape.dart';
+```dart
+import 'package:html_unescape/html_unescape.dart';
 
-    main() {
-      var unescape = new HtmlUnescape();
-      print(unescape.convert("&lt;strong&#62;This &quot;escaped&quot; string "
-          "will be printed normally.</strong>"));
-    }
+main() {
+  var unescape = new HtmlUnescape();
+  print(unescape.convert("&lt;strong&#62;This &quot;escaped&quot; string."));
+}
+```
 
 If you're sure you will only encounter the most common escaped characters,
 you can `import 'package:html_unescape/html_unescape_basic.dart'` instead of
