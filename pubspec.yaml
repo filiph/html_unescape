@@ -2,7 +2,7 @@ name: html_unescape
 description: A small library for un-escaping HTML.
 version: 0.0.1
 author: Filip Hracek <filip.hracek@gmail.com>
-#homepage: https://www.example.com
+homepage: https://github.com/filiph/html_unescape
 
 environment:
   sdk: '>=1.0.0 <2.0.0'
