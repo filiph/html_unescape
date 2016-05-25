@@ -1,6 +1,6 @@
 name: html_unescape
 description: A small library for un-escaping HTML.
-version: 0.1.3
+version: 0.1.4
 author: Filip Hracek <filip.hracek@gmail.com>
 homepage: https://github.com/filiph/html_unescape
 
