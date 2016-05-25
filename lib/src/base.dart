@@ -1,3 +1,6 @@
+// Copyright (c) 2016, Filip Hracek. All rights reserved. Use of this source
+// code is governed by a BSD-style license that can be found in the LICENSE
+// file.
 library html_unescape.base;
 
 import 'dart:convert';
@@ -10,12 +13,12 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
   final int _hashCodeUnit = '#'.codeUnitAt(0);
   final int _xCodeUnit = 'x'.codeUnitAt(0);
 
-  List<String> get _keys;
-  List<String> get _values;
-  int get _maxKeyLength;
+  List<String> get keys;
+  List<String> get values;
+  int get maxKeyLength;
 
   HtmlUnescapeBase() {
-    _chunkLength = max(_maxKeyLength, _minHexadecimalEscapeLength);
+    _chunkLength = max(maxKeyLength, _minHexadecimalEscapeLength);
   }
 
   /// Converts from HTML-escaped [data] to unescaped string.
@@ -57,10 +60,10 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
 
       // Try &nbsp;
       var replaced = false;
-      for (int i = 0; i < _keys.length; i++) {
-        var key = _keys[i];
+      for (int i = 0; i < keys.length; i++) {
+        var key = keys[i];
         if (chunk.startsWith(key)) {
-          var replacement = _values[i];
+          var replacement = values[i];
           buf.write(replacement);
           offset += key.length;
           replaced = true;

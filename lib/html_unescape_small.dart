@@ -10,7 +10,7 @@ import 'src/base.dart';
 import 'src/data/named_chars_basic.dart' as data;
 
 class HtmlUnescape extends HtmlUnescapeBase {
-  int _maxKeyLength = data.maxKeyLength;
-  List<String> _keys = data.keys;
-  List<String> _values = data.values;
+  final int maxKeyLength = data.maxKeyLength;
+  final List<String> keys = data.keys;
+  final List<String> values = data.values;
 }
