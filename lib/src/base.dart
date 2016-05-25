@@ -10,15 +10,15 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
   final int _hashCodeUnit = '#'.codeUnitAt(0);
   final int _xCodeUnit = 'x'.codeUnitAt(0);
 
-  List<String> get keys;
-  List<String> get values;
-  int get maxKeyLength;
+  List<String> get _keys;
+  List<String> get _values;
+  int get _maxKeyLength;
 
   HtmlUnescapeBase() {
-    _chunkLength = max(maxKeyLength, _minHexadecimalEscapeLength);
+    _chunkLength = max(_maxKeyLength, _minHexadecimalEscapeLength);
   }
 
-  @override
+  /// Converts from HTML-escaped [data] to unescaped string.
   String convert(String data) {
     // Return early if possible.
     if (data.indexOf('&') == -1) return data;
@@ -57,10 +57,10 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
 
       // Try &nbsp;
       var replaced = false;
-      for (int i = 0; i < keys.length; i++) {
-        var key = keys[i];
+      for (int i = 0; i < _keys.length; i++) {
+        var key = _keys[i];
         if (chunk.startsWith(key)) {
-          var replacement = values[i];
+          var replacement = _values[i];
           buf.write(replacement);
           offset += key.length;
           replaced = true;
