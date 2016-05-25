@@ -4,9 +4,9 @@ A Dart library for unescaping HTML-encoded strings.
 
 Supports:
 
-* Named Character References (`&nbsp`)
+* Named Character References (`&nbsp;`)
 * Decimal Character Reference (`&#225;`)
-* Hexadecimal Character Reference (`&#xE3`)
+* Hexadecimal Character Reference (`&#xE3;`)
 
 ## Usage
 
