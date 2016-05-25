@@ -4,7 +4,7 @@
 
 /// Unescapes HTML5-escaped strings. This version doesn't support all runes
 /// to decrease code size and increase performance.
-library html5_unescape;
+library html_unescape.small;
 
 import 'src/base.dart';
 import 'src/data/named_chars_basic.dart' as data;
