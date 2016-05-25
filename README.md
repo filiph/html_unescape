@@ -17,7 +17,8 @@ import 'package:html_unescape/html_unescape.dart';
 
 main() {
   var unescape = new HtmlUnescape();
-  print(unescape.convert("&lt;strong&#62;This &quot;escaped&quot; string."));
+  var text = unescape.convert("&lt;strong&#62;This &quot;escaped&quot; string");
+  print(text);
 }
 ```
 
