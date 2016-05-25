@@ -18,6 +18,12 @@ void main() {
 }
 
 void runTests(ConverterFactory converterFactory) {
+  test('leaves empty string alone', () {
+    final unescape = converterFactory();
+
+    expect(unescape.convert(""), "");
+  });
+
   group('unescapes named', () {
     final unescape = converterFactory();
 

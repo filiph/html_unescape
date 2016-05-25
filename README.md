@@ -28,11 +28,25 @@ main() {
 }
 ```
 
+You can also use the converter to transform a stream. For example, the code
+below will transform a POSIX `stdin` into an HTML-unencoded `stdout`.
+
+```dart
+await stdin
+    .transform(new Utf8Decoder())
+    .transform(new HtmlUnescape())
+    .transform(new Utf8Encoder())
+    .pipe(stdout);
+```
+
+## Full versus small
+
 If you're sure you will only encounter the most common escaped characters,
 you can `import 'package:html_unescape/html_unescape_basic.dart'` instead of
 the full version. This will decrease code size and increase performance. The
 only difference is in the size of the Named Character Reference dictionary.
-The full set includes the likes of `&DownLeftRightVector;` or `&UpArrowBar;`.
+The full set includes the likes of `&DownLeftRightVector;` or `&UpArrowBar;` 
+while the small set only includes the first 255 charcodes.
 
 ## Issues
 
