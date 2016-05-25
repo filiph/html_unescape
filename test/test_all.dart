@@ -45,6 +45,13 @@ void runTests(ConverterFactory converterFactory) {
       expect(unescape.convert('Look &lt;a&gt;here&lt/a&nonexistent;'),
           'Look <a>here</a&nonexistent;');
     });
+
+    if (unescape is lib_full.HtmlUnescape) {
+      test('&CounterClockwiseContourIntegral;', () {
+        expect(
+            unescape.convert('Hi &CounterClockwiseContourIntegral;'), "Hi ∳");
+      });
+    }
   });
 
   group('unescapes decimal', () {
