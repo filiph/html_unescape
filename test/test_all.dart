@@ -1,0 +1,87 @@
+// Copyright (c) 2016, Filip Hracek. All rights reserved. Use of this source
+// code is governed by a BSD-style license that can be found in the LICENSE
+// file.
+
+import 'package:test/test.dart';
+
+import 'package:html_unescape/html_unescape.dart' as lib_full;
+import 'package:html_unescape/html_unescape_small.dart' as lib_small;
+import 'package:html_unescape/src/base.dart' show HtmlUnescapeBase;
+
+void main() {
+  group("Full", () {
+    runTests(() => new lib_full.HtmlUnescape());
+  });
+  group("Small", () {
+    runTests(() => new lib_small.HtmlUnescape());
+  });
+}
+
+void runTests(ConverterFactory converterFactory) {
+  group('unescapes named', () {
+    final unescape = converterFactory();
+
+    test('quotes', () {
+      expect(unescape.convert('This is &quot;awesome&quot;.'),
+          'This is "awesome".');
+    });
+
+    test('quotes next to beginning', () {
+      expect(
+          unescape.convert('&quot;awesome&quot; it is.'), '"awesome" it is.');
+    });
+
+    test('quotes next to end', () {
+      expect(
+          unescape.convert('This is &quot;awesome&quot;'), 'This is "awesome"');
+    });
+
+    test('complete &lt; instead of incomplete inner &lt', () {
+      expect(
+          unescape.convert('Look &lt;a&gt;here&lt/a&gt'), 'Look <a>here</a>');
+    });
+
+    test('but ignores non-existent', () {
+      expect(unescape.convert('Look &lt;a&gt;here&lt/a&nonexistent;'),
+          'Look <a>here</a&nonexistent;');
+    });
+  });
+
+  group('unescapes decimal', () {
+    final unescape = converterFactory();
+
+    test('"<" and ">"', () {
+      expect(unescape.convert('&#60;a&#62;'), '<a>');
+    });
+  });
+
+  group('unescapes hexadecimal', () {
+    final unescape = converterFactory();
+
+    test('"<" and ">"', () {
+      expect(unescape.convert('&#x3c;a&#x3E;'), '<a>');
+    });
+  });
+
+  group('ignores invalid', () {
+    final unescape = converterFactory();
+
+    test('decimal', () {
+      expect(unescape.convert('Hello &#123i;'), 'Hello &#123i;');
+    });
+
+    test('hexadecimal', () {
+      expect(unescape.convert('Hello &#x3cw;'), 'Hello &#x3cw;');
+    });
+
+    test('decimal without semicolon', () {
+      expect(unescape.convert('Hello &#345'), 'Hello &#345');
+    });
+
+    test('hexadecimal without semicolon', () {
+      expect(unescape.convert('Hello &#x3cworld'), 'Hello &#x3cworld');
+    });
+  });
+}
+
+typedef HtmlUnescapeBase ConverterFactory();
