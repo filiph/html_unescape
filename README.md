@@ -1,6 +1,6 @@
 # html_unescape
 
-A Dart library for unescaping HTML-encoded strings. 
+A Dart library for unescaping HTML-encoded strings.
 
 Supports:
 
@@ -13,6 +13,8 @@ The idea is that while you seldom need _encoding_ to such a level (most of the
 time, all you need to escape is `<`, `>`, `/`, `&` and `"`), you do want to
 make sure that you cover the whole spectrum when _decoding_ from HTML-escaped
 strings.
+
+Inspired by Java's [unbescape](http://www.unbescape.org/) library.
 
 ## Usage
 

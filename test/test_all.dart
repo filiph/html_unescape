@@ -15,6 +15,8 @@ void main() {
   group("Small", () {
     runTests(() => new lib_small.HtmlUnescape());
   });
+
+  // TODO: add async tests for chunked conversion
 }
 
 void runTests(ConverterFactory converterFactory) {
