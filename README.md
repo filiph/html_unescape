@@ -1,5 +1,7 @@
 # html_unescape
 
+[![Build Status](https://travis-ci.org/filiph/html_unescape.svg?branch=master)](https://travis-ci.org/filiph/html_unescape)
+
 A Dart library for unescaping HTML-encoded strings.
 
 Supports:
