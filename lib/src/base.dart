@@ -13,7 +13,7 @@ const int _minDecimalEscapeLength = 4; // &#0;
 const int _minHexadecimalEscapeLength = 5; // &#x0;
 
 abstract class HtmlUnescapeBase
-    extends ChunkedConverter<String, String, String, String> {
+    extends Converter<String, String> {
   int _chunkLength;
 
   List<String> get keys;
