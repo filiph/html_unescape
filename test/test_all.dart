@@ -2,11 +2,13 @@
 // code is governed by a BSD-style license that can be found in the LICENSE
 // file.
 
-import 'package:test/test.dart';
+import 'dart:async';
+import 'dart:convert';
 
 import 'package:html_unescape/html_unescape.dart' as lib_full;
 import 'package:html_unescape/html_unescape_small.dart' as lib_small;
 import 'package:html_unescape/src/base.dart' show HtmlUnescapeBase;
+import 'package:test/test.dart';
 
 void main() {
   group("Full", () {
@@ -16,7 +18,14 @@ void main() {
     runTests(() => new lib_small.HtmlUnescape());
   });
 
-  // TODO: add async tests for chunked conversion
+  test("converts in chunks", () async {
+    var unescape = new lib_full.HtmlUnescape();
+
+    var stream = new Stream.fromIterable(
+        ['This is &quot;awesome&qu'.codeUnits, 'ot;.'.codeUnits]);
+    expect(stream.transform(UTF8.decoder).transform(unescape).first,
+        completion('This is "awesome".'));
+  });
 }
 
 void runTests(ConverterFactory converterFactory) {
