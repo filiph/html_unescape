@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0
+
+- Bump to 1.0. The package has baked for 2 years now.
+
 ## 0.1.5
 
 - Remove deprecated dependency on `ChunkedConverter` 
