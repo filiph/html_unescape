@@ -1,6 +1,7 @@
 name: html_unescape
-description: A small library for un-escaping HTML.
-version: 0.1.5
+description: >
+  A small library for un-escaping HTML. Supports all Named Character References,
+  Decimal Character References and Hexadecimal Character References.
 author: Filip Hracek <filip.hracek@gmail.com>
 homepage: https://github.com/filiph/html_unescape
 
