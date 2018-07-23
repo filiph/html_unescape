@@ -51,7 +51,7 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
         if (nextSemicolon != -1) {
           var hex = chunk.codeUnitAt(2) == _xCodeUnit;
           var str = chunk.substring(hex ? 3 : 2, nextSemicolon);
-          int ord = int.parse(str, radix: hex ? 16 : 10, onError: (_) => -1);
+          int ord = int.tryParse(str, radix: hex ? 16 : 10) ?? -1;
           if (ord != -1) {
             buf.write(new String.fromCharCode(ord));
             offset += nextSemicolon + 1;

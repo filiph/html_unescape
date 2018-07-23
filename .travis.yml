@@ -1,4 +1,4 @@
 language: dart
 script:
   - dartanalyzer --fatal-warnings --fatal-lints --strong .
-  - dart -c test/test_all.dart
+  - pub run test

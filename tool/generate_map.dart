@@ -14,7 +14,7 @@ main() async {
   var response = await req.close();
   client.close();
   List<String> contents = await response
-      .transform(UTF8.decoder)
+      .transform(utf8.decoder)
       .transform(const LineSplitter())
       .toList();
   var refLines =

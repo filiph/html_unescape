@@ -23,7 +23,7 @@ void main() {
 
     var stream = new Stream.fromIterable(
         ['This is &quot;awesome&qu'.codeUnits, 'ot;.'.codeUnits]);
-    expect(stream.transform(UTF8.decoder).transform(unescape).first,
+    expect(stream.transform(utf8.decoder).transform(unescape).first,
         completion('This is "awesome".'));
   });
 }
