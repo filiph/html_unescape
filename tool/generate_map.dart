@@ -14,6 +14,7 @@ main() async {
   var response = await req.close();
   client.close();
   List<String> contents = await response
+      .cast<List<int>>()
       .transform(utf8.decoder)
       .transform(const LineSplitter())
       .toList();
