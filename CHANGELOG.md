@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1+3
+
+- Conform to upcoming change to HttpRequest and HttpClientResponse
+
 ## 1.0.1
 
 - Upgrade to Dart 2
