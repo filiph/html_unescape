@@ -12,8 +12,8 @@ Future<void> main() async {
   //
   //    $ dart example/posix_converter.dart < some_file.html
   await stdin
-      .transform(new Utf8Decoder())
-      .transform(new HtmlUnescape())
-      .transform(new Utf8Encoder())
+      .transform(Utf8Decoder())
+      .transform(HtmlUnescape())
+      .transform(Utf8Encoder())
       .pipe(stdout);
 }

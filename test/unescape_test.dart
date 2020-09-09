@@ -11,17 +11,17 @@ import 'package:html_unescape/src/base.dart' show HtmlUnescapeBase;
 import 'package:test/test.dart';
 
 void main() {
-  group("Full", () {
-    runTests(() => new lib_full.HtmlUnescape());
+  group('Full', () {
+    runTests(() => lib_full.HtmlUnescape());
   });
-  group("Small", () {
-    runTests(() => new lib_small.HtmlUnescape());
+  group('Small', () {
+    runTests(() => lib_small.HtmlUnescape());
   });
 
-  test("converts in chunks", () async {
-    var unescape = new lib_full.HtmlUnescape();
+  test('converts in chunks', () async {
+    var unescape = lib_full.HtmlUnescape();
 
-    var stream = new Stream.fromIterable(
+    var stream = Stream.fromIterable(
         ['This is &quot;awesome&qu'.codeUnits, 'ot;.'.codeUnits]);
     expect(stream.transform(utf8.decoder).transform(unescape).first,
         completion('This is "awesome".'));
@@ -32,7 +32,7 @@ void runTests(ConverterFactory converterFactory) {
   test('leaves empty string alone', () {
     final unescape = converterFactory();
 
-    expect(unescape.convert(""), "");
+    expect(unescape.convert(''), '');
   });
 
   group('unescapes named', () {
@@ -66,7 +66,7 @@ void runTests(ConverterFactory converterFactory) {
     if (unescape is lib_full.HtmlUnescape) {
       test('&CounterClockwiseContourIntegral;', () {
         expect(
-            unescape.convert('Hi &CounterClockwiseContourIntegral;'), "Hi ∳");
+            unescape.convert('Hi &CounterClockwiseContourIntegral;'), 'Hi ∳');
       });
     }
   });
@@ -108,4 +108,4 @@ void runTests(ConverterFactory converterFactory) {
   });
 }
 
-typedef HtmlUnescapeBase ConverterFactory();
+typedef ConverterFactory = HtmlUnescapeBase Function();

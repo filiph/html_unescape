@@ -18,21 +18,24 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
   HtmlUnescapeBase() {
     _chunkLength = max(maxKeyLength, _minHexadecimalEscapeLength);
   }
+
   List<String> get keys;
+
   int get maxKeyLength;
 
   List<String> get values;
 
   /// Converts from HTML-escaped [data] to unescaped string.
+  @override
   String convert(String data) {
     // Return early if possible.
-    if (data.indexOf('&') == -1) return data;
+    if (!data.contains('&')) return data;
 
-    StringBuffer buf = new StringBuffer();
-    int offset = 0;
+    final buf = StringBuffer();
+    var offset = 0;
 
     while (true) {
-      int nextAmp = data.indexOf('&', offset);
+      final nextAmp = data.indexOf('&', offset);
       if (nextAmp == -1) {
         // Rest of string.
         buf.write(data.substring(offset));
@@ -47,13 +50,13 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
       // Try &#123; and &#xff;
       if (chunk.length > _minDecimalEscapeLength &&
           chunk.codeUnitAt(1) == _hashCodeUnit) {
-        int nextSemicolon = chunk.indexOf(';');
+        final nextSemicolon = chunk.indexOf(';');
         if (nextSemicolon != -1) {
           var hex = chunk.codeUnitAt(2) == _xCodeUnit;
           var str = chunk.substring(hex ? 3 : 2, nextSemicolon);
-          int ord = int.tryParse(str, radix: hex ? 16 : 10) ?? -1;
+          final ord = int.tryParse(str, radix: hex ? 16 : 10) ?? -1;
           if (ord != -1) {
-            buf.write(new String.fromCharCode(ord));
+            buf.write(String.fromCharCode(ord));
             offset += nextSemicolon + 1;
             continue;
           }
@@ -62,7 +65,7 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
 
       // Try &nbsp;
       var replaced = false;
-      for (int i = 0; i < keys.length; i++) {
+      for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
         if (chunk.startsWith(key)) {
           var replacement = values[i];
@@ -81,11 +84,12 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
     return buf.toString();
   }
 
+  @override
   StringConversionSink startChunkedConversion(Sink<String> sink) {
     if (sink is! StringConversionSink) {
-      sink = new StringConversionSink.from(sink);
+      sink = StringConversionSink.from(sink);
     }
-    return new _HtmlUnescapeSink(sink as StringConversionSink, this);
+    return _HtmlUnescapeSink(sink as StringConversionSink, this);
   }
 }
 
@@ -101,6 +105,7 @@ class _HtmlUnescapeSink extends StringConversionSinkBase {
 
   _HtmlUnescapeSink(this._sink, this._unescape);
 
+  @override
   void addSlice(String chunk, int start, int end, bool isLast) {
     end = RangeError.checkValidRange(start, end, chunk.length);
     // If the chunk is empty, it's probably because it's the last one.
@@ -119,6 +124,7 @@ class _HtmlUnescapeSink extends StringConversionSinkBase {
     if (isLast) close();
   }
 
+  @override
   void close() {
     if (_carry != null) {
       _sink.add(_unescape.convert(_carry));
@@ -128,7 +134,7 @@ class _HtmlUnescapeSink extends StringConversionSinkBase {
   }
 
   void _convert(String chunk, int start, int end, bool isLast) {
-    int nextAmp = chunk.indexOf('&', start);
+    var nextAmp = chunk.indexOf('&', start);
     if (nextAmp == -1 || nextAmp > end) {
       _sink.add(chunk.substring(start, end));
       _carry = null;
@@ -137,7 +143,7 @@ class _HtmlUnescapeSink extends StringConversionSinkBase {
 
     while (nextAmp + _unescape.maxKeyLength <= end) {
       var lastAmp = chunk.lastIndexOf('&', end);
-      int subEnd = lastAmp != -1 ? lastAmp : nextAmp + _unescape.maxKeyLength;
+      final subEnd = lastAmp != -1 ? lastAmp : nextAmp + _unescape.maxKeyLength;
       var result = _unescape.convert(chunk.substring(start, subEnd));
       _sink.add(result);
       start = subEnd;

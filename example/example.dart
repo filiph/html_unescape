@@ -5,7 +5,7 @@
 import 'package:html_unescape/html_unescape.dart';
 
 void main() {
-  var unescape = new HtmlUnescape();
-  print(unescape.convert("&lt;strong&#62;This &quot;escaped&quot; string "
-      "will be printed normally.</strong>"));
+  var unescape = HtmlUnescape();
+  print(unescape.convert('&lt;strong&#62;This &quot;escaped&quot; string '
+      'will be printed normally.</strong>'));
 }
