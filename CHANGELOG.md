@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- Slight refactoring to address lint issues.
+
 ## 1.0.1+3
 
 - Conform to upcoming change to HttpRequest and HttpClientResponse
