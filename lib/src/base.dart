@@ -12,17 +12,25 @@ const int _minDecimalEscapeLength = 4; // x
 const int _minHexadecimalEscapeLength = 5; // &#0;
 const int _xCodeUnit = 120; // &#x0;
 
+/// An abstract class that converts from HTML5-escaped strings
+/// to unicode strings using [keys] and [values].
 abstract class HtmlUnescapeBase extends Converter<String, String> {
   int _chunkLength;
 
+  /// Constructs a new converter.
   HtmlUnescapeBase() {
     _chunkLength = max(maxKeyLength, _minHexadecimalEscapeLength);
   }
 
+  /// A list of keys (such as `&nbsp;`) recognized by this converter.
   List<String> get keys;
 
+  /// The length of the longest key in [keys]. Used to optimize parsing.
   int get maxKeyLength;
 
+  /// The list of values (such as `±`). This list has the same length as
+  /// [keys], and strings in it correspond to the strings in [keys]
+  /// at the same index.
   List<String> get values;
 
   /// Converts from HTML-escaped [data] to unescaped string.
