@@ -16,7 +16,7 @@ time, all you need to escape is `<`, `>`, `/`, `&` and `"`), you do want to
 make sure that you cover the whole spectrum when _decoding_ from HTML-escaped
 strings.
 
-Inspired by Java's [unbescape](http://www.unbescape.org/) library.
+Inspired by Java's [unbescape](https://www.unbescape.org/) library.
 
 ## Usage
 
