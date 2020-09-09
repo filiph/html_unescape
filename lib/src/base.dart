@@ -85,7 +85,7 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
     if (sink is! StringConversionSink) {
       sink = new StringConversionSink.from(sink);
     }
-    return new _HtmlUnescapeSink(sink, this);
+    return new _HtmlUnescapeSink(sink as StringConversionSink, this);
   }
 }
 

@@ -4,7 +4,7 @@ import 'package:path/path.dart' as path;
 import 'dart:async';
 
 // TODO: use https://www.w3.org/TR/html51/entities.json instead?
-main() async {
+Future<void> main() async {
   const url = "https://raw.githubusercontent.com/unbescape/unbescape/master/"
       "src/main/java/org/unbescape/html/Html5EscapeSymbolsInitializer.java";
   print("Downloading unbescape source file at $url.");
@@ -38,7 +38,7 @@ main() async {
 
   await writeMapToFile(map, "named_chars_all.dart");
 
-  var smallerMap = new Map.from(map);
+  var smallerMap = new Map<String, String>.from(map);
   for (var key in map.keys) {
     var ord = map[key].runes.first;
     if (ord > 255) {

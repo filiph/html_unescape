@@ -7,7 +7,7 @@ import 'dart:io';
 
 import 'package:html_unescape/html_unescape.dart';
 
-main() async {
+Future<void> main() async {
   // Try something like
   //
   //    $ dart example/posix_converter.dart < some_file.html
