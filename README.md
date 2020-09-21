@@ -26,7 +26,7 @@ A simple usage example:
 import 'package:html_unescape/html_unescape.dart';
 
 main() {
-  var unescape = new HtmlUnescape();
+  var unescape = HtmlUnescape();
   var text = unescape.convert("&lt;strong&#62;This &quot;escaped&quot; string");
   print(text);
 }
@@ -37,9 +37,9 @@ below will transform a POSIX `stdin` into an HTML-unencoded `stdout`.
 
 ```dart
 await stdin
-    .transform(new Utf8Decoder())
-    .transform(new HtmlUnescape())
-    .transform(new Utf8Encoder())
+    .transform(Utf8Decoder())
+    .transform(HtmlUnescape())
+    .transform(Utf8Encoder())
     .pipe(stdout);
 ```
 
