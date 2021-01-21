@@ -36,13 +36,10 @@ abstract class Benchmark {
 
   static const reportedBand = 95;
 
-  static const _outlierMargin = ((100 - reportedBand) / 2) / 100;
-
   final Stopwatch _watch = Stopwatch();
 
   void execute() {
     final measurements = _measure();
-    final orderedValues = List<num>.from(measurements, growable: false)..sort();
     // final lower = orderedValues[(batchesPerBenchmark * _outlierMargin).round()];
     // final upper = orderedValues[
     //     (batchesPerBenchmark - batchesPerBenchmark * _outlierMargin).round()];
