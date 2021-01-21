@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.0-nullsafety.0
+
+- Migrate to null safety.
+- Increases performance (at least according to the microbenchmark 
+  in `benchmark/`) by 17% in AOT mode and close to 100% in JIT mode.
+
 ## 1.0.2
 
 - Slight refactoring to address lint issues.
