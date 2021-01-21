@@ -71,7 +71,7 @@ abstract class Benchmark {
   /// This exists so that the compiler cannot completely optimize-out the
   /// [run] function.
   @visibleForTesting
-  int result;
+  int result = 0;
 
   /// Runs a batch of [iterationsPerBatch] executions of [run], and reports
   /// back the number of microseconds elapsed.

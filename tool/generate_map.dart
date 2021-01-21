@@ -40,7 +40,7 @@ Future<void> main() async {
 
   var smallerMap = Map<String, String>.from(map);
   for (var key in map.keys) {
-    var ord = map[key].runes.first;
+    var ord = map[key]!.runes.first;
     if (ord > 255) {
       smallerMap.remove(key);
     }
@@ -60,7 +60,7 @@ Future writeMapToFile(Map<String, String> map, String filename) async {
   var maxKeyLength = keysList.first.length;
 
   var valuesList =
-      List<String>.generate(keysList.length, (index) => map[keysList[index]]);
+      List<String?>.generate(keysList.length, (index) => map[keysList[index]]);
   var valuesListLiteral = jsonCodec.convert(valuesList);
   valuesListLiteral = valuesListLiteral.replaceAll(r'"$"', r'"\$"');
 

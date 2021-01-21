@@ -15,7 +15,7 @@ const int _xCodeUnit = 120; // &#x0;
 /// An abstract class that converts from HTML5-escaped strings
 /// to unicode strings using [keys] and [values].
 abstract class HtmlUnescapeBase extends Converter<String, String> {
-  int _chunkLength;
+  late int _chunkLength;
 
   /// Constructs a new converter.
   HtmlUnescapeBase() {
@@ -97,7 +97,7 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
     if (sink is! StringConversionSink) {
       sink = StringConversionSink.from(sink);
     }
-    return _HtmlUnescapeSink(sink as StringConversionSink, this);
+    return _HtmlUnescapeSink(sink, this);
   }
 }
 
@@ -109,7 +109,7 @@ class _HtmlUnescapeSink extends StringConversionSinkBase {
   ///
   /// If the previous slice ended with ampersand too close to end,
   /// then the next slice may continue the reference.
-  String _carry;
+  String? _carry;
 
   _HtmlUnescapeSink(this._sink, this._unescape);
 
@@ -123,7 +123,7 @@ class _HtmlUnescapeSink extends StringConversionSinkBase {
       return;
     }
     if (_carry != null) {
-      chunk = _carry + chunk.substring(start, end);
+      chunk = _carry! + chunk.substring(start, end);
       start = 0;
       end = chunk.length;
       _carry = null;
@@ -135,7 +135,7 @@ class _HtmlUnescapeSink extends StringConversionSinkBase {
   @override
   void close() {
     if (_carry != null) {
-      _sink.add(_unescape.convert(_carry));
+      _sink.add(_unescape.convert(_carry!));
       _carry = null;
     }
     _sink.close();
@@ -174,7 +174,7 @@ class _HtmlUnescapeSink extends StringConversionSinkBase {
     if (_carry == null) {
       _carry = nextCarry;
     } else {
-      _carry = _carry + nextCarry;
+      _carry = _carry! + nextCarry;
     }
   }
 }
