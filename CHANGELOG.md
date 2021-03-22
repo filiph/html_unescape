@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+- Bump to stable null-safe version
+
 ## 2.0.0-nullsafety.0
 
 - Migrate to null safety.
